@@ -1,24 +1,32 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import DownloadScreen from "./screens/DownloadScreen";
+import LibaryScreen from "./screens/LibaryScreen";
+import MyPlaylistScreen from "./screens/MyPlaylistScreen";
+import CurrentPlaylistScreen from './screens/CurrentPlaylistScreen';
+import MySongsScreen from './screens/MySongsScreen';
+
+
+const Stack = createStackNavigator();
+
+
 
 const App = () => {
   return (
-    <>
-      <View style={styles.container}>
-        <Text>App js</Text>
-      </View>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Libary" component={LibaryScreen} />
+        <Stack.Screen name="Download Music" component={DownloadScreen} />
+        <Stack.Screen name="My Playlists" component={MyPlaylistScreen} />
+        <Stack.Screen name="My Songs" component={MySongsScreen} />
+        <Stack.Screen name="Current Playlist" component={CurrentPlaylistScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 100,
-  },
-});
 
 export default App;
