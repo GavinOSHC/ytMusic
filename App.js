@@ -1,20 +1,17 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-
-import DownloadScreen from "./screens/DownloadScreen";
-import LibaryScreen from "./screens/LibaryScreen";
-import MyPlaylistScreen from "./screens/MyPlaylistScreen";
+import DownloadScreen from './screens/DownloadScreen';
+import LibaryScreen from './screens/LibaryScreen';
+import MyPlaylistScreen from './screens/MyPlaylistScreen';
 import CurrentPlaylistScreen from './screens/CurrentPlaylistScreen';
 import MySongsScreen from './screens/MySongsScreen';
 
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
 
 function LibaryStack() {
   return (
@@ -26,9 +23,6 @@ function LibaryStack() {
     </Stack.Navigator>
   );
 }
-
-
-
 
 const App = () => {
   return (
@@ -48,6 +42,5 @@ const App = () => {
     </NavigationContainer>
   );
 };
-
 
 export default App;
