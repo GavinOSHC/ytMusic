@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Container, Item, Input, Label, Button, Text} from 'native-base';
-import {Col, Row, Grid} from 'react-native-easy-grid';
+import {Row, Grid} from 'react-native-easy-grid';
+import {connect} from 'react-redux';
+import {handleDownloadSong} from '../redux/actions';
 
-const DownloadScreen = () => {
+const DownloadScreen = ({dispatch}) => {
   const [textValue, setTextValue] = useState('');
 
-  console.log(textValue);
+  const downloadSong = () => {
+    dispatch(handleDownloadSong(textValue));
+  };
 
   return (
     <Container>
@@ -20,7 +24,7 @@ const DownloadScreen = () => {
                 onChangeText={(text) => setTextValue(text)}
                 style={styles.input}
               />
-              <Button primary style={styles.button}>
+              <Button primary style={styles.button} onPress={downloadSong}>
                 <Text>Download</Text>
               </Button>
             </Item>
@@ -57,4 +61,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DownloadScreen;
+const mapStateToProps = (state) => {
+  return {
+    gotSong: state.downloadReducer,
+  };
+};
+
+export default connect(mapStateToProps)(DownloadScreen);
