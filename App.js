@@ -4,13 +4,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Provider} from 'react-redux';
-import {configureStore} from './redux/configureStore';
+import {configureStore} from './src/redux/configureStore';
 
-import DownloadScreen from './screens/DownloadScreen';
-import LibaryScreen from './screens/LibaryScreen';
-import MyPlaylistScreen from './screens/MyPlaylistScreen';
-import CurrentPlaylistScreen from './screens/CurrentPlaylistScreen';
-import MySongsScreen from './screens/MySongsScreen';
+import DownloadScreen from './src/screens/DownloadScreen';
+import LibaryScreen from './src/screens/LibaryScreen';
+import MyPlaylistScreen from './src/screens/MyPlaylistScreen';
+import CurrentPlaylistScreen from './src/screens/CurrentPlaylistScreen';
+import MySongsScreen from './src/screens/MySongsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

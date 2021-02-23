@@ -5,8 +5,10 @@ import {Row, Grid} from 'react-native-easy-grid';
 import {connect} from 'react-redux';
 import {handleDownloadSong} from '../redux/actions';
 
-const DownloadScreen = ({dispatch}) => {
+const DownloadScreen = ({dispatch, reduxState}) => {
   const [textValue, setTextValue] = useState('');
+
+  console.log(reduxState);
 
   const downloadSong = () => {
     dispatch(handleDownloadSong(textValue));
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    gotSong: state.downloadReducer,
+    reduxState: state.downloadReducer,
   };
 };
 
