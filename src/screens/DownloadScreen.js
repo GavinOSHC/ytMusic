@@ -5,6 +5,8 @@ import {Row, Grid} from 'react-native-easy-grid';
 import {connect} from 'react-redux';
 import {handleDownloadSong} from '../redux/actions';
 
+import DownloadModal from '../modals/DownloadModal';
+
 const DownloadScreen = ({dispatch, reduxState}) => {
   const [textValue, setTextValue] = useState('');
 
@@ -16,6 +18,7 @@ const DownloadScreen = ({dispatch, reduxState}) => {
 
   return (
     <Container>
+      <DownloadModal visible={reduxState.inProgress} />
       <Grid>
         <Row size={1} style={styles.row}>
           <Item stackedLabel style={styles.itemContainer}>
