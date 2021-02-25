@@ -1,4 +1,4 @@
-import {DW_SONG, DW_SONG_FAILDED, DW_SONG_DONE} from '../actions';
+import {DW_SONG, DW_SONG_FAILDED, DW_SONG_DONE, RESET_ERROR} from '../actions';
 
 export default (state = {inProgress: false, error: false}, action) => {
   switch (action.type) {
@@ -15,6 +15,12 @@ export default (state = {inProgress: false, error: false}, action) => {
         error: true,
       };
     case DW_SONG_DONE:
+      return {
+        ...state,
+        inProgress: false,
+        error: false,
+      };
+    case RESET_ERROR:
       return {
         ...state,
         inProgress: false,

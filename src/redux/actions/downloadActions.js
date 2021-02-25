@@ -3,6 +3,7 @@ import ytdl from 'react-native-ytdl';
 export const DW_SONG = 'DW_SONG';
 export const DW_SONG_FAILDED = 'DW_SONG_FAILED';
 export const DW_SONG_DONE = 'DW_SONG_DONE';
+export const RESET_ERROR = 'RESET_ERROR';
 
 const RNFS = require('react-native-fs');
 const path = RNFS.DocumentDirectoryPath;
@@ -25,6 +26,13 @@ const requestDownloadSongDone = () => {
   return {
     type: DW_SONG_DONE,
     payload: 'Downloaded Song',
+  };
+};
+
+const resetError = () => {
+  return {
+    type: RESET_ERROR,
+    payload: 'reset state',
   };
 };
 
@@ -54,6 +62,10 @@ export const handleDownloadSong = (url) => async (dispatch) => {
     console.log(error);
     dispatch(requestDownloadSongFailed(error));
   }
+};
+
+export const resetErrorMessage = () => async (dispatch) => {
+  dispatch(resetError());
 };
 
 // path to song - /data/user/0/com.ytmusic/files/Sometimes.mp3
