@@ -42,9 +42,11 @@ export const handleDownloadSong = (url) => async (dispatch) => {
   console.log('----Downloading Song------');
   dispatch(requestDownloadSong());
   try {
-    //const id = ytdl.getURLVideoID(url);
-    //const {videoDetails} = await ytdl.getBasicInfo(url);
-    // const videoID = videoDetails.title;
+    //const videoID = ytdl.getURLVideoID(url);
+    const {videoDetails} = await ytdl.getBasicInfo(url);
+    const videoTitle = videoDetails.title;
+    const length = videoDetails.lengthSeconds;
+
     // const result = await ytdl(url, {quality: 'highestaudio'});
     // const urlToDownload = result[0].url;
     // const downloadPath = `${path}/${videoID}.mp3`;
@@ -69,3 +71,15 @@ export const resetErrorMessage = () => async (dispatch) => {
 };
 
 // path to song - /data/user/0/com.ytmusic/files/Sometimes.mp3
+
+/**
+ * data
+ * songs : []
+ *
+ * {
+ *  YTid: yt ID
+ *  title : song title
+ *  url: path to file - file://${path},
+ *  length: seconds
+ * }
+ */
