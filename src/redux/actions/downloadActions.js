@@ -1,4 +1,5 @@
 import ytdl from 'react-native-ytdl';
+import {writeSong} from '../../api/DataAPI';
 
 export const DW_SONG = 'DW_SONG';
 export const DW_SONG_FAILDED = 'DW_SONG_FAILED';
@@ -42,24 +43,30 @@ export const handleDownloadSong = (url) => async (dispatch) => {
   console.log('----Downloading Song------');
   dispatch(requestDownloadSong());
   try {
-    //const videoID = ytdl.getURLVideoID(url);
+    const videoID = ytdl.getURLVideoID(url);
     const {videoDetails} = await ytdl.getBasicInfo(url);
     const videoTitle = videoDetails.title;
     const length = videoDetails.lengthSeconds;
 
-    // const result = await ytdl(url, {quality: 'highestaudio'});
-    // const urlToDownload = result[0].url;
-    // const downloadPath = `${path}/${videoID}.mp3`;
-    // console.log(downloadPath);
-    // RNFS.downloadFile({
-    //   fromUrl: urlToDownload,
-    //   toFile: downloadPath,
-    // }).promise.then(() => {
-    //   console.log('----- download completed -----');
-    // });
-    await delay(5000);
-    dispatch(requestDownloadSongDone());
-    console.log('song done');
+    const result = await ytdl(url, {quality: 'highestaudio'});
+    const urlToDownload = result[0].url;
+    const downloadPath = `${path}/${videoID}.mp3`;
+
+    const songObject = {
+      videoID,
+      videoTitle,
+      length,
+      path: downloadPath,
+    };
+
+    RNFS.downloadFile({
+      fromUrl: urlToDownload,
+      toFile: downloadPath,
+    }).promise.then(() => {
+      writeSong(songObject);
+      dispatch(requestDownloadSongDone());
+      console.log('----- download completed -----');
+    });
   } catch (error) {
     console.log(error);
     dispatch(requestDownloadSongFailed(error));
@@ -70,7 +77,8 @@ export const resetErrorMessage = () => async (dispatch) => {
   dispatch(resetError());
 };
 
-// path to song - /data/user/0/com.ytmusic/files/Sometimes.mp3
+// path to song  android - /data/user/0/com.ytmusic/files/Sometimes.mp3
+// path to song ios - /Users/gavin.dhaliwal/Library/Developer/CoreSimulator/Devices/A748A595-DB32-443E-BFE9-8F7076A6D98A/data/Containers/Data/Application/985C66E4-93C1-47AB-9BEF-87DE19D31E8A/Documents/Xqta3VD8h2g.mp3
 
 /**
  * data
@@ -81,5 +89,13 @@ export const resetErrorMessage = () => async (dispatch) => {
  *  title : song title
  *  url: path to file - file://${path},
  *  length: seconds
+ * }
+ *
+ *
+ * {
+ *  "length": "188",
+ *  "path": "/Users/gavin.dhaliwal/Library/Developer/CoreSimulator/Devices/A748A595-DB32-443E-BFE9-8F7076A6D98A/data/Containers/Data/Application/985C66E4-93C1-47AB-9BEF-87DE19D31E8A/Documents/RRl_C73vFtQ.mp3",
+ *  "videoID": "RRl_C73vFtQ",
+ *  "videoTitle": "Juice WRLD - Black & White"
  * }
  */

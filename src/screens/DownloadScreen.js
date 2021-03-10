@@ -12,9 +12,11 @@ const DownloadScreen = ({dispatch, reduxState, navigation}) => {
   const [textValue, setTextValue] = useState('');
 
   console.log(reduxState);
+  console.log(textValue);
 
   const downloadSong = () => {
     dispatch(handleDownloadSong(textValue));
+    setTextValue('');
   };
 
   return (
